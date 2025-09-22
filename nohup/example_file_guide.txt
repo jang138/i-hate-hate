@@ -1,0 +1,12 @@
+** `./run_experiments.sh` file 에 대한 사용 가이드입니다.
+
+1. start/status/stop/tail 서브커맨드를 제공하며, 예시 정의는 스크립트 상단 CONFIG 섹션(EXPERIMENTS 배열)에서 변경합니다.
+2. 로그는 korean_AU/logs/, PID는 korean_AU/nohup/pids/에 저장됩니다.
+3. 사용법:
+    - 시작: bash nohup/run_experiments.sh start
+    - 상태: bash nohup/run_experiments.sh status
+    - 종료: bash nohup/run_experiments.sh stop
+    - 로그 보기: bash nohup/run_experiments.sh tail run_bert_lr5e-4
+4. CONFIG 예시(스크립트 상단):
+    - "local_name|--run_name ssac-bert --lr 5e-4"
+    - local_name이 자동으로 로그/ PID 파일명에 반영됩니다.
