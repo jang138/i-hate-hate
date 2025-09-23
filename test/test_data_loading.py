@@ -39,7 +39,7 @@ def load_data_from_hf(dataset_name, split, revision="main"):
 
 def test_hf_dataset_loading(revision="main"):
     """HuggingFace 데이터셋 로딩 테스트"""
-    dataset_name = "onestone11/nikl-hate-speech"
+    dataset_name = "team-sbai/nikl-hate-speech"
 
     print(f"HuggingFace 데이터셋 로딩 테스트 시작 (revision: {revision})")
     print("=" * 80)
