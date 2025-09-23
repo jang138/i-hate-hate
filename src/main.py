@@ -77,7 +77,7 @@ def parse_args():
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default="onestone11/nikl-hate-speech",
+        default="team-sbai/nikl-hate-speech",
         help="HuggingFace 데이터셋 이름",
     )
 

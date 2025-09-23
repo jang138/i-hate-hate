@@ -12,6 +12,11 @@ __pycache__/
 # ipynb
 *.ipynb
 
+# CUDA 관련 파일들
+*.deb
+*.rpm
+cuda-*
+
 # Distribution / packaging
 .Python
 build/
