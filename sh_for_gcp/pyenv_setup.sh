@@ -8,7 +8,3 @@ echo 'export PATH="$HOME/.pyenv/bin:$PATH"' >> ~/.bashrc
 echo 'eval "$(pyenv init --path)"' >> ~/.bashrc
 echo 'eval "$(pyenv init -)"' >> ~/.bashrc
 echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.bashrc
-
-# 환경 변수 적용
-source ~/.bashrc && echo ".bashrc updated with pyenv variables."
-exec $SHELL
