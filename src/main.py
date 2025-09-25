@@ -51,13 +51,13 @@ def parse_args():
     parser.add_argument(
         "--batch_size",
         type=int,
-        default=32,
+        default=4,
         help="배치 사이즈 (메모리에 맞게 조절, 예: 16 또는 32)",
     )
     parser.add_argument(
         "--max_len", type=int, default=256, help="입력 시퀀스의 최대 길이"
     )
-    parser.add_argument("--lr", type=float, default=2e-5, help="학습률(learning rate)")
+    parser.add_argument("--lr", type=float, default=3e-5, help="학습률(learning rate)")
     parser.add_argument(
         "--weight_decay", type=float, default=0.01, help="가중치 감소(weight decay) 값"
     )

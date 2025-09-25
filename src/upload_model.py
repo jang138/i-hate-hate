@@ -11,7 +11,7 @@ def upload_model(model_dir, repo_name, revision="v1.0", commit_message=None):
     print(f"Loading model from: {model_dir}")
 
     model = AutoModelForSequenceClassification.from_pretrained(model_dir)
-    tokenizer = AutoTokenizer.from_pretrained("klue/bert-base")
+    tokenizer = AutoTokenizer.from_pretrained("beomi/KcELECTRA-base-v2022")
 
     # 기본 커밋 메시지
     if commit_message is None:
@@ -22,6 +22,7 @@ def upload_model(model_dir, repo_name, revision="v1.0", commit_message=None):
         repo_name,
         commit_message=commit_message,
         revision=revision,
+        safe_serialization=False
     )
 
     # 토크나이저 업로드
@@ -39,7 +40,7 @@ if __name__ == "__main__":
 
     upload_model(
         model_dir=model_dir,
-        repo_name="team-sbai/bert-base-aeda-default",
-        revision="v1.1-aeda",
-        commit_message="AEDA augmentation with default params",
+        repo_name="team-sbai/boemi_gg",
+        revision="v1.0",
+        commit_message="버미 구글 얼리 20, 레이드 2e-5, 에폭 5, 배치 4",
     )
