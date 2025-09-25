@@ -67,7 +67,7 @@ def infer_and_eval(model_name, model_dir, dataset_name="team-sbai/nikl-hate-spee
     return output
 
 
-def save_predictions(output, filename_prefix="result"):
+def save_predictions(output, filename_prefix="result-aeda"):
     """예측 결과를 CSV와 JSONL 형식으로 저장"""
     project_root = os.path.dirname(os.path.dirname(__file__))
     result_path = os.path.join(project_root, "prediction")
