@@ -74,7 +74,7 @@ def parse_args():
     parser.add_argument(
         "--run_name",
         type=str,
-        default="ELECTRA-dis",
+        default="ELECTRA-dis-aeda",
         help="wandb 에 기록되는 run name",
     )
     parser.add_argument(

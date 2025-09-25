@@ -65,11 +65,13 @@ def load_trainer_for_train(args, model, hate_train_dataset, hate_valid_dataset):
         load_best_model_at_end=True,
         report_to="wandb",  # W&B 로깅 활성화
         run_name=args.run_name,  # run_name 지정
+        
+        save_safetensors=False,
     )
 
     ## Add callback & optimizer & scheduler
     MyCallback = EarlyStoppingCallback(
-        early_stopping_patience=3, early_stopping_threshold=0.001
+        early_stopping_patience=7, early_stopping_threshold=0.001
     )
 
     optimizer = torch.optim.AdamW(
@@ -138,4 +140,6 @@ def train(args):
     print("--- Start train ---")
     trainer.train()
     print("--- Finish train ---")
-    model.save_pretrained(args.model_dir)
+    # model.save_pretrained(args.model_dir)
+    model.save_pretrained(args.model_dir, safe_serialization=False)
+
