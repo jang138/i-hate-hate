@@ -3,6 +3,8 @@ import argparse
 import wandb
 from model import train
 
+PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
+
 
 def parse_args():
     """학습(train)과 추론(infer)에 사용되는 arguments를 관리하는 함수"""
@@ -27,7 +29,10 @@ def parse_args():
         help='모델 이름 (예: "klue/bert-base", "monologg/koelectra-base-finetuned-nsmc")',
     )
     parser.add_argument(
-        "--save_path", type=str, default="./model", help="모델 저장 경로"
+        "--save_path",
+        type=str,
+        default=os.path.join(PROJECT_ROOT, "model"),
+        help="모델 저장 경로",
     )
     parser.add_argument(
         "--save_step", type=int, default=200, help="모델을 저장할 스텝 간격"
@@ -63,24 +68,21 @@ def parse_args():
     parser.add_argument(
         "--model_dir",
         type=str,
-        default="./best_model",
+        default=os.path.join(PROJECT_ROOT, "best_model"),
         help="추론 시 불러올 모델의 경로",
     )
-
     parser.add_argument(
         "--run_name",
         type=str,
         default="bert-test",
         help="wandb 에 기록되는 run name",
     )
-
     parser.add_argument(
         "--dataset_name",
         type=str,
         default="team-sbai/nikl-hate-speech",
         help="HuggingFace 데이터셋 이름",
     )
-
     parser.add_argument(
         "--dataset_revision", type=str, default="v1.0", help="데이터셋 버전/브랜치"
     )
@@ -91,8 +93,10 @@ def parse_args():
 
 if __name__ == "__main__":
     os.environ["TOKENIZERS_PARALLELISM"] = "false"  # tokenizer 사용 시 warning 방지
+    os.environ["WANDB_DIR"] = os.path.join(PROJECT_ROOT, "wandb")
+
     args = parse_args()
-    wandb.init(project="project2_test1", name=args.run_name)  # 프로젝트 이름 설정
+    wandb.init(project="project2_test1", name=args.run_name)
     train(args)
 
 # .sh

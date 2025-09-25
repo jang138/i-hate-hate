@@ -28,7 +28,7 @@ def inference(model, tokenized_sent, device):
     return (np.concatenate(output_pred).tolist(),)
 
 
-def infer_and_eval(model_name, model_dir, dataset_name="onestone11/nikl-hate-speech"):
+def infer_and_eval(model_name, model_dir, dataset_name="team-sbai/nikl-hate-speech"):
     """학습된 모델로 추론(infer)한 후에 예측한 결과(pred)를 평가(eval)"""
     # set device
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -62,22 +62,33 @@ def infer_and_eval(model_name, model_dir, dataset_name="onestone11/nikl-hate-spe
         }
     )
 
-    # 최종적으로 완성된 예측한 라벨 csv 파일 형태로 저장.
-    result_path = "./prediction/"
-    if not os.path.exists(result_path):
-        os.makedirs(result_path)
-    output.to_csv(os.path.join(result_path, "result.csv"), index=False)
-    print("--- Save result ---")
-
-    output_path = os.path.join(result_path, "result_v2.jsonl")
-    output.to_json(output_path, orient="records", lines=True, force_ascii=False)
-    print("--- Save result as JSONL ---")
+    save_predictions(output)
 
     return output
 
 
+def save_predictions(output, filename_prefix="result"):
+    """예측 결과를 CSV와 JSONL 형식으로 저장"""
+    project_root = os.path.dirname(os.path.dirname(__file__))
+    result_path = os.path.join(project_root, "prediction")
+
+    os.makedirs(result_path, exist_ok=True)
+
+    # CSV 저장
+    csv_path = os.path.join(result_path, f"{filename_prefix}.csv")
+    output.to_csv(csv_path, index=False)
+    print("--- Save result ---")
+
+    # JSONL 저장
+    jsonl_path = os.path.join(result_path, f"{filename_prefix}.jsonl")
+    output.to_json(jsonl_path, orient="records", lines=True, force_ascii=False)
+    print("--- Save result as JSONL ---")
+
+
 if __name__ == "__main__":
     model_name = "klue/bert-base"
-    model_dir = "./best_model"
+
+    project_root = os.path.dirname(os.path.dirname(__file__))
+    model_dir = os.path.join(project_root, "best_model")
 
     infer_and_eval(model_name, model_dir)
