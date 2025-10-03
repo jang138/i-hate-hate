@@ -25,7 +25,7 @@ def parse_args():
     parser.add_argument(
         "--model_name",
         type=str,
-        default="snunlp/KR-ELECTRA-discriminator",
+        default="klue/bert-base",
         help='모델 이름 (예: "klue/bert-base", "monologg/koelectra-base-finetuned-nsmc")',
     )
     parser.add_argument(
@@ -47,7 +47,7 @@ def parse_args():
         "--save_limit", type=int, default=5, help="저장할 모델의 최대 개수"
     )
     parser.add_argument("--seed", type=int, default=42, help="랜덤 시드 값")
-    parser.add_argument("--epochs", type=int, default=10, help="에폭 수 (예: 10)")
+    parser.add_argument("--epochs", type=int, default=5, help="에폭 수 (예: 10)")
     parser.add_argument(
         "--batch_size",
         type=int,
@@ -57,7 +57,7 @@ def parse_args():
     parser.add_argument(
         "--max_len", type=int, default=256, help="입력 시퀀스의 최대 길이"
     )
-    parser.add_argument("--lr", type=float, default=3e-5, help="학습률(learning rate)")
+    parser.add_argument("--lr", type=float, default=5e-5, help="학습률(learning rate)")
     parser.add_argument(
         "--weight_decay", type=float, default=0.01, help="가중치 감소(weight decay) 값"
     )
@@ -74,7 +74,7 @@ def parse_args():
     parser.add_argument(
         "--run_name",
         type=str,
-        default="ELECTRA-dis-aeda",
+        default="model-bert-base_dataset-nikl-hate-speech-v1.0_ep-5_bat-8_lr-5e-5",
         help="wandb 에 기록되는 run name",
     )
     parser.add_argument(
@@ -84,7 +84,7 @@ def parse_args():
         help="HuggingFace 데이터셋 이름",
     )
     parser.add_argument(
-        "--dataset_revision", type=str, default="v1.1-aeda", help="데이터셋 버전/브랜치"
+        "--dataset_revision", type=str, default="v1.0", help="데이터셋 버전/브랜치"
     )
 
     args = parser.parse_args()
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     os.environ["WANDB_DIR"] = os.path.join(PROJECT_ROOT, "wandb")
 
     args = parse_args()
-    wandb.init(project="i-hate-hate-1", name=args.run_name)
+    wandb.init(project="i-hate-hate-after", name=args.run_name)
     train(args)
 
 # .sh

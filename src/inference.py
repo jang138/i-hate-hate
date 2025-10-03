@@ -67,7 +67,7 @@ def infer_and_eval(model_name, model_dir, dataset_name="team-sbai/nikl-hate-spee
     return output
 
 
-def save_predictions(output, filename_prefix="result-elec-aeda"):
+def save_predictions(output, filename_prefix="result-model-bert-base_dataset-nikl-hate-speech-v1.0_ep-5_bat-8_lr-5e-5"):
     """예측 결과를 CSV와 JSONL 형식으로 저장"""
     project_root = os.path.dirname(os.path.dirname(__file__))
     result_path = os.path.join(project_root, "prediction")
@@ -86,7 +86,7 @@ def save_predictions(output, filename_prefix="result-elec-aeda"):
 
 
 if __name__ == "__main__":
-    model_name = "snunlp/KR-ELECTRA-discriminator"
+    model_name = "klue/bert-base"
 
     project_root = os.path.dirname(os.path.dirname(__file__))
     model_dir = os.path.join(project_root, "best_model")

@@ -62,7 +62,7 @@ def construct_tokenized_dataset(dataset, tokenizer, max_length):
         truncation=True,
         max_length=max_length,
         add_special_tokens=True,
-        return_token_type_ids=False,  # BERT 이후 모델(RoBERTa 등) 사용할때 False
+        # return_token_type_ids=False,  # BERT 이후 모델(RoBERTa 등) 사용할때 False
     )
     print("tokenizing 된 데이터 형태")
     print("-" * 100)
